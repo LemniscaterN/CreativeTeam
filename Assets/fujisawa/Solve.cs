@@ -23,7 +23,21 @@ public class Solve : MonoBehaviour
     private List<int> edgeSolution = new List<int>();
     private List<int> cornerSolution = new List<int>();
 
-    public List<int> GetEdgeSolution() {
+    private CubeDefinitoin cd = null;
+
+    void Awake()
+    {
+        cd = gameObject.GetComponent<CubeDefinitoin>();
+        //TestCubeArray tca = new TestCubeArray();
+        //Debug.Log("Awake!!");
+        //Cube cb = new Cube();
+        //cb.SetFaceIds(tca.getShColors7());
+        //cb.ShowCube();
+        //MakeSolution(cb);
+    }
+
+    public List<int> GetEdgeSolution()
+    {
         return edgeSolution;
     }
 
@@ -34,29 +48,33 @@ public class Solve : MonoBehaviour
 
     public bool MakeSolution(Cube c)
     {
-        int [,]faceIds = c.GetFaceIds();
-        if (c.GetColorConsistency() == false) return false;
+        int[,] faceIds = c.GetFaceIds();
+        if (c.GetColorConsistency() == false)
+        {
+            Debug.Log("ColorConsistency false");
+            return false;
+        }
+
 
         bool isOKEdge = MakeEdgeSolutino(faceIds);
         bool isOKCorner = MakeCornerSolution(faceIds);
-
-        if (!isOKEdge || !isOKCorner) {
-            edgeSolution.RemoveRange(0, edgeSolution.Count-1);
-            cornerSolution.RemoveRange(0, cornerSolution.Count-1);
+        if (!isOKEdge || !isOKCorner)
+        {
+            Debug.Log($"解法出力エラー！　Edge:{isOKEdge} Corner:{isOKCorner}");
+            if (edgeSolution.Count > 0) edgeSolution.RemoveRange(0, edgeSolution.Count - 1);
+            if (cornerSolution.Count > 0) cornerSolution.RemoveRange(0, cornerSolution.Count - 1);
             return false;
-        } 
+        }
 
-
-        //CubeDefinitoin cb = gameObject.GetComponent<CubeDefinitoin>();
-
-        //Debug.Log("解法表示:");
-        //foreach (var id in edgeSolution) {
-        //    Debug.Log($"Edge id:{id} 平仮名:{cb.GetPixelNameFromId(id)}");
-        //}
-        //foreach (var id in cornerSolution)
-        //{
-        //    Debug.Log($"Corn id:{id} 平仮名:{cb.GetPixelNameFromId(id)}");
-        //}
+        Debug.Log("解法表示:");
+        foreach (var id in edgeSolution)
+        {
+            Debug.Log($"Edge id:{id} 平仮名:{cd.GetPixelNameFromId(id)}");
+        }
+        foreach (var id in cornerSolution)
+        {
+            Debug.Log($"Corn id:{id} 平仮名:{cd.GetPixelNameFromId(id)}");
+        }
 
         return true;
     }
@@ -64,8 +82,8 @@ public class Solve : MonoBehaviour
     //エッジキューブとコーナーキューブに番号を振る
     private int GetCubeIdFromPixelId(int pixelId)
     {
-        int[][] edgeInclude = GetEdgePairIds();
-        int[][] cornerInclude = GetCornerTrioIds(); ;
+        int[][] edgeInclude = cd.GetEdgePairIds();
+        int[][] cornerInclude = cd.GetCornerTrioIds(); ;
         for (int i = 0; i < 12; i++)
         {
             int index = Array.IndexOf(edgeInclude[i], pixelId);
@@ -83,7 +101,7 @@ public class Solve : MonoBehaviour
     private bool IsEdge(int pixelId)
     {
         int[][] edgeInclude = new int[12][];
-        edgeInclude = GetEdgePairIds();
+        edgeInclude = cd.GetEdgePairIds();
         int Id = -1;
         for (int i = 0; i < edgeInclude.Length; i++)
         {
@@ -96,7 +114,7 @@ public class Solve : MonoBehaviour
     private bool IsCorner(int pixelId)
     {
         int[][] cornerInclude = new int[8][];
-        cornerInclude = GetCornerTrioIds();
+        cornerInclude = cd.GetCornerTrioIds();
         int Id = -1;
         for (int i = 0; i < cornerInclude.Length; i++)
         {
@@ -106,29 +124,32 @@ public class Solve : MonoBehaviour
         return false;
     }
 
-    private bool IsEdgeBufferCubeId(int id,bool truely = false)
+    private bool IsEdgeBufferCubeId(int id, bool truely = false)
     {
-        int[] ids = GetEdgeBufferPixelIds();
-        if (truely && id==ids[0])return true;
+        int[] ids = cd.GetEdgeBufferPixelIds();
+        if (truely && id == ids[0]) return true;
         if (!truely && (id == ids[0] || id == ids[1])) return true;
         return false;
     }
 
     private bool IsCornerBufferCubeId(int id, bool truely = false)
     {
-        int[] ids = GetCornerBufferPixelIds();
+        int[] ids = cd.GetCornerBufferPixelIds();
         if (truely && id == ids[0]) return true;
-        if (!truely && (id == ids[0] || id == ids[1] || id== ids[2])) return true;
+        if (!truely && (id == ids[0] || id == ids[1] || id == ids[2])) return true;
         return false;
     }
 
     //解放出力の優先順位id
-    private int[] GetCornerPriority() {
+    private int[] GetCornerPriority()
+    {
         int[] priority = new int[24];
-        int[] cornerNumbers = new int[4] {0,2,6,8};
+        int[] cornerNumbers = new int[4] { 0, 2, 6, 8 };
         int NowCnt = 0;
-        for (int f = 0; f < 6; f++) {
-            foreach(int p in cornerNumbers){
+        for (int f = 0; f < 6; f++)
+        {
+            foreach (int p in cornerNumbers)
+            {
                 priority[NowCnt] = f * 10 + p;
                 NowCnt++;
             }
@@ -141,7 +162,8 @@ public class Solve : MonoBehaviour
         int NowCnt = 0;
         for (int f = 0; f < 6; f++)
         {
-            for (int p = 1; p < 9; p+=2) {
+            for (int p = 1; p < 9; p += 2)
+            {
                 priority[NowCnt] = f * 10 + p;
                 NowCnt++;
             }
@@ -149,115 +171,128 @@ public class Solve : MonoBehaviour
         return priority;
     }
 
-    //CubeIdとPixelIdの相互関係
-    private int[][] GetEdgePairIds() {
-        int[][] edgeInclude = new int[12][] {
-            new int[2]{1,45} ,new int[2]{3,35} ,new int[2]{5,13} ,new int[2]{7,55},
-            new int[2]{21,43},new int[2]{23,15},new int[2]{25,33},new int[2]{27,53},
-            new int[2]{11,41},new int[2]{17,57},
-            new int[2]{31,47},new int[2]{37,51}
-        };
-        return edgeInclude;
-    }
-    private int[][] GetCornerTrioIds()
+    private bool IsSameCornerCube(int a, int b)
     {
-        int[][] cornerInclude = new int[8][] {
-            new int[3]{0,32,48} ,new int[3]{2,10,42} ,new int[3]{8,16,58} ,new int[3]{6,38,52},
-            new int[3]{20,12,40},new int[3]{22,30,46},new int[3]{26,18,56},new int[3]{28,36,50}
-        };
-        return cornerInclude;
+        int[][] cornerInclude = new int[8][];
+        cornerInclude = cd.GetCornerTrioIds();
+        for (int i = 0; i < cornerInclude.Length; i++)
+        {
+            int Id1 = Array.IndexOf(cornerInclude[i], a);
+            int Id2 = Array.IndexOf(cornerInclude[i], b);
+            if (Id1 >= 0 && Id2 >= 0) return true;
+        }
+        return false;
     }
 
-    int[] GetCornerBufferPixelIds(bool truely = false)
+    private bool MakeEdgeSolutino(int[,] faceIds)
     {
-        if (truely) return new int[1] { 46 };
-        return new int[3] { 46, 22, 30 };
-    }
-    int[] GetEdgeBufferPixelIds(bool truely = false)
-    {
-        if (truely) return new int[1] { 41 };
-        return new int[2] { 41, 11 };
-    }
 
-    private bool MakeEdgeSolutino(int [,] faceIds) {
-        //初期状態での完成具合の確認
+        int bufferPixelId = cd.GetEdgeBufferPixelIds(true)[0];
+        int bufferFace = bufferPixelId / 10;
+        int bufferPixel = bufferPixelId % 10;
+
+        Cube solver = new Cube();
+        solver.SetFaceIds(faceIds);
+
+        int[,] solverFaceIds = solver.GetFaceIds();
+
+        //初期状態での完成具合の確認 ただし、bufferのみ常にfalse
         bool[] EachEdgeCompCheck = new bool[12] { false, false, false, false, false, false, false, false, false, false, false, false };
         for (int f = 0; f < 6; f++)
         {
             for (int p = 0; p < 9; p++)
             {
-                if (f * 10 + p == faceIds[f, p] && IsEdge(f * 10 + p))EachEdgeCompCheck[GetCubeIdFromPixelId(f * 10 + p)] = true;
+                if (f * 10 + p == solverFaceIds[f, p] && IsEdge(f * 10 + p)) EachEdgeCompCheck[GetCubeIdFromPixelId(f * 10 + p)] = true;
             }
         }
-        int nextId = -1;
+        EachEdgeCompCheck[GetCubeIdFromPixelId(bufferPixelId)] = false;
+
+
+
         int edgeProcessCounter = 0;
         int[] edgePriority = GetEdgePriority();
         int nowPriorityEdgeIndex = 0;
-        int bufferId = faceIds[GetEdgeBufferPixelIds(true)[0] /10, GetEdgeBufferPixelIds(true)[0]%10];
 
-        //全てのエッジが正しい位置になるまでループ
-        while (EachEdgeCompCheck.Count(value => value == true) != EachEdgeCompCheck.Length)
+        //buffer以外の全てのエッジが正しい位置になるまでループ
+        while (EachEdgeCompCheck.Count(value => value == true) != EachEdgeCompCheck.Length - 1)
         {
-            //破損ルービックキューブのケース
-            if (EachEdgeCompCheck.Count(value => value == true) == EachEdgeCompCheck.Length - 1)
-            {
-                Debug.LogWarning("Solve Edge warning1:1EO is left. Can't solve.");
-                return false;
-            }
-
-            int startId = bufferId;
+            solverFaceIds = solver.GetFaceIds();
+            int startId = solverFaceIds[bufferFace, bufferPixel];
+            //Debug.Log("StartId:"+startId);
 
             //bufferにあるキューブが既に正しい位置か確認する
-            //既に正しい位置ならば優先順位edgePriorityに従ってbufferを未完成箇所と交換する（セットアップ）
-            bool bufferChange = false;
-            if (IsEdgeBufferCubeId(bufferId))
+            //既に正しい位置ならば優先順位edgePriorityに従ってbufferを未完成箇所と交換する
+
+            if (IsEdgeBufferCubeId(startId))
             {
+
                 while (EachEdgeCompCheck[GetCubeIdFromPixelId(edgePriority[nowPriorityEdgeIndex])] == true || IsEdgeBufferCubeId(edgePriority[nowPriorityEdgeIndex]))
                 {
                     nowPriorityEdgeIndex++;
+                    //Debug.Log($"{nowPriorityEdgeIndex} Max:{edgePriority.Length}");
+                    //if (nowPriorityEdgeIndex < edgePriority.Length) Debug.Log(edgePriority[nowPriorityEdgeIndex]);
+
                     if (nowPriorityEdgeIndex >= edgePriority.Length)
                     {
-                        Debug.LogWarning("Solve Edge warning2:Priority out of range.");
+                        //プライオリティーリストの異常
+                        Debug.LogWarning("Solve Edge warning2:Priority cube out of range.");
                         return false;
                     }
                 }
-                bufferChange = true;
                 startId = edgePriority[nowPriorityEdgeIndex];
                 edgeSolution.Add(startId);
+                //Debug.LogWarning("交換" + startId);
                 edgeProcessCounter++;
+                solver.SwapCube(startId, bufferPixelId);
             }
 
-            //bufferから繋がる箇所をSolutionにAddする。移動先がスタート位置なら終了
-            int nf = startId / 10;
-            int np = startId % 10;
-            EachEdgeCompCheck[GetCubeIdFromPixelId(startId)] = true;
-            nextId = faceIds[nf, np];
+            //bufferから繋がる箇所をSolutionにAddする。
             while (true)
             {
-                edgeSolution.Add(nextId);
-                edgeProcessCounter++;
-                EachEdgeCompCheck[GetCubeIdFromPixelId(nextId)] = true;
-                nf = nextId / 10;
-                np = nextId % 10;
-                if (faceIds[nf, np] == startId) break;
-                nextId = faceIds[nf, np];
-            }
+                //現在のbuffer
+                solverFaceIds = solver.GetFaceIds();
+                int swapTargetId = solverFaceIds[bufferFace, bufferPixel];
 
-            //bufferのキューブを変更していたら戻す（逆セットアップ）
-            //そうで無ければbufferをループの終了地点に更新する
-            if (bufferChange)
-            {
-                edgeSolution.Add(startId);
+                //移動先がスタート位置なら終了
+                if (IsEdgeBufferCubeId(swapTargetId)) break;
+
+                //交換
+                EachEdgeCompCheck[GetCubeIdFromPixelId(swapTargetId)] = true;
+                solver.SwapCube(swapTargetId, bufferPixelId);
+                edgeSolution.Add(swapTargetId);
+                //Debug.LogWarning(swapTargetId);
                 edgeProcessCounter++;
             }
-            else bufferId = nextId;
 
-            //bufferにあるキューブが正しい位置ならフラグを立てる
-            if (IsEdgeBufferCubeId(bufferId, true)) EachEdgeCompCheck[GetCubeIdFromPixelId(bufferId)] = true;            
+            //Debug.Log("loop");
 
         }
 
-        //奇数回の時は偶数になるように修正
+        //buffer以外が完成している時、bufferを確認する。
+        solverFaceIds = solver.GetFaceIds();
+        for (int i = 0; i < 8; i++)
+        {
+            if (EachEdgeCompCheck[i] == false)
+            {
+                for (int k = 0; k < 60; k++)
+                {
+                    if (GetCubeIdFromPixelId(k) == i) Debug.Log(k);
+                }
+                break;
+            }
+        }
+
+        if (IsEdgeBufferCubeId(solverFaceIds[bufferFace, bufferPixel], true))
+        {
+            Debug.Log("エッジOK");
+        }
+        else
+        {
+            Debug.LogWarning("Solve Edge warning1:1EO is left. Can't solve.");
+            return false;
+        }
+
+        //奇数回の操作の時は偶数になるように修正
         if (edgeProcessCounter % 2 == 1)
         {
             edgeSolution.Add(47);
@@ -268,75 +303,85 @@ public class Solve : MonoBehaviour
         return true;
     }
 
-    bool MakeCornerSolution(int [,]faceIds) {
+    private bool MakeCornerSolution(int[,] faceIds)
+    {
+
+        Cube solver = new Cube();
+        solver.SetFaceIds(faceIds);
+
+        int[,] solverFaceIds = solver.GetFaceIds();
+        int bufferPixelId = cd.GetCornerBufferPixelIds(true)[0];
+        int bufferFace = bufferPixelId / 10;
+        int bufferPixel = bufferPixelId % 10;
+
+
         //初期状態での完成具合の確認
-        bool[] EachCornerCompCheck = new bool[8] { false, false, false, false, false, false, false, false};
+        bool[] EachCornerCompCheck = new bool[8] { false, false, false, false, false, false, false, false };
         for (int f = 0; f < 6; f++)
         {
             for (int p = 0; p < 9; p++)
             {
-                if (f * 10 + p == faceIds[f, p] && IsCorner((f * 10 + p)))EachCornerCompCheck[GetCubeIdFromPixelId(f * 10 + p)] = true;
+                if (f * 10 + p == solverFaceIds[f, p] && IsCorner(f * 10 + p)) EachCornerCompCheck[GetCubeIdFromPixelId(f * 10 + p)] = true;
             }
         }
+        EachCornerCompCheck[GetCubeIdFromPixelId(bufferPixelId)] = false;
 
-        int nextId = -1;
         int[] cornerPriority = GetCornerPriority();
-        int nowPriorityCornerIndex = 0;
-        int bufferId = faceIds[GetCornerBufferPixelIds(true)[0] / 10, GetCornerBufferPixelIds(true)[0] % 10];
+        int nowPriorityEdgeIndex = 0;
 
-        while (EachCornerCompCheck.Count(value => value == true) != EachCornerCompCheck.Length)
+        while (EachCornerCompCheck.Count(value => value == true) != EachCornerCompCheck.Length - 1)
         {
-            if (EachCornerCompCheck.Count(value => value == true) == EachCornerCompCheck.Length - 1)
-            {
-                Debug.LogWarning("Solve Corner warning1:1EO is left. Can't solve.");
-                return false;
-            }
 
-            int startId = bufferId;
+            int startId = solverFaceIds[bufferFace, bufferPixel];
 
-            //bufferの部分が完成しているかEOしている
-            bool bufferChange = false;
-            if (IsCornerBufferCubeId(bufferId))
+            if (IsCornerBufferCubeId(startId))
             {
-                while (EachCornerCompCheck[GetCubeIdFromPixelId(cornerPriority[nowPriorityCornerIndex])] == true || IsCornerBufferCubeId(cornerPriority[nowPriorityCornerIndex]))
+
+                while (EachCornerCompCheck[GetCubeIdFromPixelId(cornerPriority[nowPriorityEdgeIndex])] == true || IsCornerBufferCubeId(cornerPriority[nowPriorityEdgeIndex]))
                 {
-                    nowPriorityCornerIndex++;
-                    if (nowPriorityCornerIndex >= cornerPriority.Length)
+                    nowPriorityEdgeIndex++;
+                    if (nowPriorityEdgeIndex >= cornerPriority.Length)
                     {
-                        Debug.LogWarning("Solve Corner warning2:Priority out of range.");
+                        //プライオリティーリストの異常
+                        Debug.LogWarning("Solve Edge warning2:Priority cube out of range.");
                         return false;
                     }
                 }
-                bufferChange = true;
-                startId = cornerPriority[nowPriorityCornerIndex];
+
+                startId = cornerPriority[nowPriorityEdgeIndex];
                 cornerSolution.Add(startId);
+                solver.SwapCube(startId, bufferPixelId);
             }
 
-            
-            int nf = startId / 10;
-            int np = startId % 10;
-            EachCornerCompCheck[GetCubeIdFromPixelId(startId)] = true;
-            nextId = faceIds[nf, np];
-
+            //bufferから繋がる箇所をSolutionにAddする。移動先がスタート位置なら終了            
             while (true)
             {
-                cornerSolution.Add(nextId);
-                EachCornerCompCheck[GetCubeIdFromPixelId(nextId)] = true;
-                nf = nextId / 10;
-                np = nextId % 10;
-                if (faceIds[nf, np] == startId) break;
-                nextId = faceIds[nf, np];
+                solverFaceIds = solver.GetFaceIds();
+                int swapTargetId = solverFaceIds[bufferFace, bufferPixel];
+                if (IsCornerBufferCubeId(swapTargetId)) break;
+
+                EachCornerCompCheck[GetCubeIdFromPixelId(swapTargetId)] = true;
+                solver.SwapCube(swapTargetId, bufferPixelId);
+
+                cornerSolution.Add(swapTargetId);
             }
 
-            if (bufferChange)cornerSolution.Add(startId);
-            else bufferId = nextId;
-            
-            if (IsCornerBufferCubeId(bufferId, true)) EachCornerCompCheck[GetCubeIdFromPixelId(bufferId)] = true;
-
         }
+
+
+        solverFaceIds = solver.GetFaceIds();
+        if (IsCornerBufferCubeId(solverFaceIds[bufferFace, bufferPixel], true))
+        {
+            Debug.Log("コーナーOK");
+        }
+        else
+        {
+            Debug.LogWarning("Solve Corner warning1:1EO is left. Can't solve.");
+            return false;
+        }
+
+
         return true;
     }
-
-
 
 }

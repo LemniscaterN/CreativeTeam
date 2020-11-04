@@ -5689,6 +5689,7 @@ GameObject:
   - component: {fileID: 1250676828}
   - component: {fileID: 1250676830}
   - component: {fileID: 1250676826}
+  - component: {fileID: 1250676831}
   m_Layer: 0
   m_Name: CubeManager
   m_TagString: Untagged
@@ -5709,6 +5710,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 0}
+  rawImage: {fileID: 212999005}
 --- !u!4 &1250676827
 Transform:
   m_ObjectHideFlags: 0
@@ -5762,6 +5764,18 @@ MonoBehaviour:
   _CD: {fileID: 1250676826}
   _cube: {fileID: 1250676829}
   _solve: {fileID: 1250676828}
+--- !u!114 &1250676831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250676825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 824f492ce51ce4e9d90a3177f37ba083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1363440117
 GameObject:
   m_ObjectHideFlags: 0
