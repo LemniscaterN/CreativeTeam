@@ -9,11 +9,14 @@
     public class ColorDiscrimination : MonoBehaviour//ルービックキューブ面の1マスずつの色識別
     {
         public Texture2D texture;
+        public RawImage rawImage;
         // Use this for initialization
         public int Color_discrimination(/*Texture2D texture*/)
         {
             Mat mat = Unity.TextureToMat(this.texture);
             Mat changedMat = new Mat();
+
+            rawImage.texture = this.texture;
             int hue, sat, val;
             int[] color_number = new int[6];
             int max, most_color;
@@ -28,11 +31,11 @@
                     sat = changedMat.At<Vec3b>(y, x)[1];
                     val = changedMat.At<Vec3b>(y, x)[2];
 
-                    if ((hue < 1 || 150 <= hue) && 100 < sat && 100 < val)//red
+                    if ((hue < 5 || 150 <= hue) && 100 < sat && 100 < val)//red
                     {
                         color_number[1]++;
                     }
-                    else if ((1 <= hue && hue < 23) && 100 < sat && 100 < val)//orange
+                    else if ((5 <= hue && hue < 23) && 100 < sat && 100 < val)//orange
                     {
                         color_number[3]++;
                     }
