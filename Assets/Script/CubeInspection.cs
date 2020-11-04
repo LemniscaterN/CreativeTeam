@@ -1,4 +1,5 @@
-﻿namespace OpenCvSharp {
+﻿namespace OpenCvSharp
+{
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
@@ -18,7 +19,7 @@
         //public Texture2D _tex;
 
         // Start is called before the first frame update
-        public int Inspection(int Surface,int i,Texture2D tex)
+        public int Inspection(int Surface, int i, Texture2D tex)
         {
             _CD.texture = tex;
             int colorNum = _CD.Color_discrimination();
@@ -29,7 +30,7 @@
 
         public void Cube_Solve()
         {
-            for(int i = 0; i < 54; i++)
+            for (int i = 0; i < 54; i++)
             {
                 Debug.Log(colorArray[i / 9, i % 9]);
             }

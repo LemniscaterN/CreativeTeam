@@ -28,11 +28,11 @@
                     sat = changedMat.At<Vec3b>(y, x)[1];
                     val = changedMat.At<Vec3b>(y, x)[2];
 
-                    if ((hue < 1 || 150 <= hue) && 100 < sat && 100 < val)//red
+                    if ((hue < 8 || 150 <= hue) && 100 < sat && 100 < val)//red
                     {
                         color_number[1]++;
                     }
-                    else if ((1 <= hue && hue < 23) && 100 < sat && 100 < val)//orange
+                    else if ((8 <= hue && hue < 23) && 100 < sat && 100 < val)//orange
                     {
                         color_number[3]++;
                     }

@@ -460,6 +460,7 @@
     <Compile Include="Assets\fujisawa\CubeDefinitoin.cs" />
     <Compile Include="Assets\fujisawa\ICube.cs" />
     <Compile Include="Assets\fujisawa\Solve.cs" />
+    <Compile Include="Assets\fujisawa\TestCubeArray.cs" />
     <Compile Include="Assets\fujisawa\color.cs" />
     <Compile Include="Assets\fujisawa\cubeArrayTest.cs" />
     <Compile Include="Assets\maru\ColorDiscrimination.cs" />

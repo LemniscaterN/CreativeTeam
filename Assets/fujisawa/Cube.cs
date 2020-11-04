@@ -4,13 +4,22 @@ using UnityEngine;
 using System.Linq;
 using System;
 /*
+    注意：CubeDefnition.csを同一オブジェクトにアタッチする必要あり。
+
     ・public void SetFaceColors(color[,] reciveFaceColors)
         [6,9]のcolorの多重配列を渡すと、渡されたcolorsと対応するfaceIdsを持つ。存在しない色の組み合わせは-1が設定される。
         この際、ルービックキューブの整合性についてはそれほど考慮しない。
+
+    ・public void SetFaceIds(int[,] reciveFaceIds)
+        [6,9]のintの多重配列を渡すと、重複IDがなければ内部に保持する。
+        この際、ルービックキューブの整合性についてはそれほど考慮しない。
+    
     ・public color[,] GetColors()
         SetColorsで渡された色の配列を返す。SetColorsが呼び出されていないなら全て緑になる。
+
     ・public int[,] GetFaceIds()
         SetColorsで渡された色をIdに変換した配列を返す。SetColorsが呼び出されていないなら全て0になる。
+
     ・public bool GetColorConsistency()
         同一IDを持つキューブや、あり得ない色の組み合わせがあるならtrueを返す。
 */
@@ -21,37 +30,63 @@ public class Cube : MonoBehaviour,ICube
     private color[,] faceColors = new color[6, 9];
     private int[,] faceIds = new int[6, 9];
 
-    //同一キューブの存在確認
-    private bool colorConsistency= true;
+ 
+    private CubeDefinitoin cd;
 
     void Awake()
     {
-        //テスト用
-        //color[] colors = new color[2];
-        //colors[0] = color.blue;
-        //colors[1] = color.orange;
-        //SetFaceColors(getShColors2());
-        //Solve s = GetComponent<Solve>();
-        //if (!s.MakeSolution(this)) Debug.LogWarning("このルービックキューブは完成出来ません");
-        //else Debug.Log("解法を作成しました");
+        cd = GetComponent<CubeDefinitoin>();    
     }
 
+    //同一キューブの存在確認
+    private bool colorConsistency= true;
 
     public color[,] GetColors() { return faceColors; }
     public int[,] GetFaceIds() { return faceIds; }
     public bool GetColorConsistency() { return colorConsistency; }
 
+    public void SetFaceIds(int[,] reciveFaceIds) {
+        bool[] pixelIdMap = new bool[60];
+        for (int i = 0; i < 60; i++)pixelIdMap[i] = false;
+        for (int f = 0; f < 6; f++) {
+            for (int p = 0; p < 9; p++) {
+                pixelIdMap[reciveFaceIds[f, p]] = true;
+            }
+        }
+
+        //for (int f = 0; f < 6; f++)
+        //{
+        //    for (int p = 0; p < 9; p++)
+        //    {
+        //        Debug.Log($"{f*10+p} {pixelIdMap[f * 10 + p]}");
+        //    }
+        //}
+
+
+        if (pixelIdMap.Count(value => value == true) == 54)
+        {
+            faceIds = reciveFaceIds;
+        }
+        else Debug.LogWarning("同一キューブが複数存在！:"+ pixelIdMap.Count(value => value == true));
+    }
+
     public void SetFaceColors(color[,] reciveFaceColors) {
         //同一IDを持つキューブが無いか確認する
         bool[] pixelIdMap = new bool[60];
-        for (int i = 0; i < 60; i++) pixelIdMap[i] = false;
+        for (int i = 0; i < 60; i++) {
+            pixelIdMap[i] = false;
+        }
+        
 
         //色の保存
         faceColors = reciveFaceColors;
 
         //センターキューブの確認
         for (int f = 0; f < 6; f++) {
-            if ((int)reciveFaceColors[f, 4] == f) pixelIdMap[f*10+4] = true;
+            if ((int)reciveFaceColors[f, 4] == f) {
+                pixelIdMap[f * 10 + 4] = true;
+                faceIds[f, 4] = f * 10 + 4;
+            }
         }
 
         
@@ -127,9 +162,15 @@ public class Cube : MonoBehaviour,ICube
         }
 
         //重複IDがあるならfalse
-        if (pixelIdMap.Count(value => value == true) != 54) colorConsistency = false;
+        if (pixelIdMap.Count(value => value == true) != 54)
+        {
+            colorConsistency = false;
+            //Debug.Log("重複アリ:" + pixelIdMap.Count(value => value == true));
+            //for (int f = 0; f < 6; f++)
+            //    for (int p = 0; p < 9; p++) Debug.Log($"{f * 10 + p} {pixelIdMap[f * 10 + p]}");
+        }
 
-        //キューブのid表示
+        ////キューブのid表示
         //for (int f = 0; f < 6; f++)
         //{
         //    Debug.Log("f:" + f);
@@ -227,139 +268,99 @@ public class Cube : MonoBehaviour,ICube
     }
 
 
+    public bool SwapCube(int f1,int f2) {
+        if (f1 % 2 != f2 % 2 || (f1 % 10 == 4 || f2 % 10 == 4)) return false;
+        if (f1 < 0 || f2 < 0 || f1 > 58 || f2 > 58) return false;
+
+        bool isEdge = true;
+        if (f1 % 2 == 0) isEdge = false;
+        
+        int[][] cubeIds;
+        int CUBE_COUNT;
+        int CUBE_INCLUDES_PIXELCOUNT;
+        if (isEdge)
+        {
+            cubeIds = cd.GetEdgePairIds();
+            CUBE_COUNT = 12;
+            CUBE_INCLUDES_PIXELCOUNT=2;
+        }
+        else {
+            cubeIds = cd.GetCornerTrioIds();
+            CUBE_COUNT = 8;
+            CUBE_INCLUDES_PIXELCOUNT=3;
+        }
+        
+        int cubeId1 = -1, cubeId2 = -1;
+        int cubeIndex1 = -1, cubeIndex2 = -1;
+        for (int i = 0; i < CUBE_COUNT; i++)
+        {
+            if (cubeId1 == -1)
+            {
+                int f1i = Array.IndexOf(cubeIds[i], f1);
+                if (f1i >= 0)
+                {
+                    cubeId1 = i;
+                    cubeIndex1 = f1i;
+                }
+            }
+            if (cubeId2 == -1)
+            {
+                int f2i = Array.IndexOf(cubeIds[i], f2);
+                if (f2i >= 0)
+                {
+                    cubeId2 = i;
+                    cubeIndex2 = f2i;
+                }
+            }
+        }
+
+        if (cubeId1 == -1 || cubeId2 == -1 || cubeIndex1 == -1 || cubeIndex2 == -1)
+        {
+            return false;
+        }
+
+        if (cubeId1 == cubeId2)
+        {
+            return false;
+        }
+
+        for (int p = 0; p < CUBE_INCLUDES_PIXELCOUNT; p++)
+        {
+            int fo1 = cubeIds[cubeId1][(cubeIndex1 + p) % CUBE_INCLUDES_PIXELCOUNT];
+            int fo2 = cubeIds[cubeId2][(cubeIndex2 + p) % CUBE_INCLUDES_PIXELCOUNT];
+            int tempId = faceIds[fo1 / 10, fo1 % 10];
+            faceIds[fo1 / 10, fo1 % 10] = faceIds[fo2 / 10, fo2 % 10];
+            faceIds[fo2 / 10, fo2 % 10] = tempId;
+        }
+        return true;
+    }
+
+
     /*
 
 
 
-    以降はテスト用プライベートスクリプト
+    以降はテスト用
 
 
      
      */
-    private color[,] getRandomColors()
+
+    public void ShowCube2(int [,]faceIds2)
     {
-        color[,] colors = new color[6, 9];
         for (int f = 0; f < 6; f++)
         {
-            for (int p = 0; p < 9; p++)
-            {
-                colors[f, p] = (color)f;
-                //Debug.Log($"f{f} p{p} : {(color)(f)}");
-                //if (p == 4)
-                //{
-                //    colors[f, p] = (color)((f + 1) % 6);
-                //}
-            }
+            Debug.Log("面:" + f);
+            Debug.Log($"{faceIds2[f, 0]} {faceIds2[f, 1]} {faceIds2[f, 2]} {faceIds2[f, 3]} {faceIds2[f, 4]} {faceIds2[f, 5]} {faceIds2[f, 6]} {faceIds2[f, 7]} {faceIds2[f, 8]}");
         }
-        return colors;
     }
 
-    private color[,] getUnCompColors()
-    {
-        color[,] colors = getCompColors();
-        colors[4, 7] = color.orange;
-        colors[3, 1] = color.white;
-        return colors;
-    }
-
-    private color[,] getIncorrColors()
-    {
-        color[,] colors = getCompColors();
-        System.Random r1 = new System.Random(0);
+    public void ShowCube() {
         for (int f = 0; f < 6; f++)
         {
-
-            for (int p = 0; p < 9; p++)
-            {
-                colors[f, p] = (color)r1.Next(0,6);
-            }
+            Debug.Log("面:" + f);
+            Debug.Log($"{faceIds[f, 0]} {faceIds[f, 1]} {faceIds[f, 2]} {faceIds[f, 3]} {faceIds[f, 4]} {faceIds[f, 5]} {faceIds[f, 6]} {faceIds[f, 7]} {faceIds[f, 8]}");
         }
-        return colors;
     }
 
-    private color[,] getCompColors()
-    {
-        color[,] colors = new color[6, 9];
-        for (int f = 0; f < 6; f++)
-        {
-
-            for (int p = 0; p < 9; p++)
-            {
-                colors[f, p] = (color)f;
-            }
-        }
-        return colors;
-    }
-
-    private color[,] getShColors1()
-    {
-        //く か　解法かく
-        color[,] colors = getCompColors();
-        colors[1, 1] = color.orange;
-        colors[4, 7] = color.yellow;
-        colors[3, 7] = color.red;
-        colors[5, 1] = color.white;
-        return colors;
-    }
-
-
-    //エッジ複数ループ
-    private color[,] getShColors2()
-    {
-        //くかく　きけき　解法
-        color[,] colors = getCompColors();
-        colors[4, 7] = color.yellow;
-        colors[2, 5] = color.green;
-        colors[5, 1] = color.white;
-        colors[0, 3] = color.blue;
-        return colors;
-    }
-
-    //buffer対面ペアEO
-    private color[,] getShColors3()
-    {
-        //かなか　解法　かなか
-        color[,] colors = getCompColors();
-        colors[1, 1] = color.white;
-        colors[4, 1] = color.red;
-
-        colors[4, 7] = color.orange;
-        colors[3, 1] = color.white;
-        return colors;
-    }
-
-    //buffer対面ペアEO + 1ペアEO（完成不可能）
-    private color[,] getShColors4()
-    {
-        //かなか　解法　かなか
-        color[,] colors = getCompColors();
-        colors[1, 1] = color.white;
-        colors[4, 1] = color.red;
-
-        colors[4, 7] = color.orange;
-        colors[3, 1] = color.white;
-
-        colors[3, 7] = color.yellow;
-        colors[5, 1] = color.orange;
-        return colors;
-    }
-
-    //コーナー　複数ループ
-    private color[,] getShColors5()
-    {
-        color[,] colors = getCompColors();
-        colors[2, 6] = color.orange;
-        colors[2, 8] = color.red;
-
-        colors[3, 6] = color.blue;
-        colors[3, 8] = color.green;
-
-        colors[0, 6] = color.red;
-        colors[0, 8] = color.orange;
-
-        colors[1, 6] = color.green;
-        colors[1, 8] = color.blue;
-        return colors;
-    }
-
-}
+  }
