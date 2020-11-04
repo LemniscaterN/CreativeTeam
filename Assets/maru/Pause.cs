@@ -5,13 +5,13 @@ using UnityEngine;
 public class Pause : MonoBehaviour
 {
 
-    //　アイテムメニューを開くボタン
+    //　Pauseを開くボタン
     [SerializeField]
     private GameObject StopButton;
     //　ゲーム再開ボタン
     [SerializeField]
     private GameObject RestartButton;
-    //　アイテムメニューパネル
+    //　Pauseパネル
     [SerializeField]
     private GameObject RestartPanel;
 
