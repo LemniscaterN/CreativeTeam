@@ -46,9 +46,10 @@ public class aiueo : MonoBehaviour
         Gojuon[i].Stop();
         yield break;
     }
+    
+    /*テスト用
     [SerializeField]
     float waitTime = 0.6f;
-
     IEnumerator test()
     {
 
@@ -59,8 +60,6 @@ public class aiueo : MonoBehaviour
         }
         yield break;
     }
-
-
 
     void Update ()
     {
@@ -75,5 +74,5 @@ public class aiueo : MonoBehaviour
        {
             aiuevoice("る");
        }
-    }
+    }*/
 }
