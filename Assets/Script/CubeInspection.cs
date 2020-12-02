@@ -1,4 +1,5 @@
-﻿namespace OpenCvSharp {
+﻿namespace OpenCvSharp
+{
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
@@ -13,12 +14,12 @@
         [SerializeField]
         private Solve _solve = null;
 
-        private color[,] colorArray = new color[6, 9];
+        static public color[,] colorArray = new color[6, 9];
 
         //public Texture2D _tex;
 
         // Start is called before the first frame update
-        public int Inspection(int Surface,int i,Texture2D tex)
+        public int Inspection(int Surface, int i, Texture2D tex)
         {
             _CD.texture = tex;
             int colorNum = _CD.Color_discrimination();
@@ -29,12 +30,21 @@
 
         public void Cube_Solve()
         {
-            for(int i = 0; i < 54; i++)
+            for (int i = 0; i < 54; i++)
             {
                 Debug.Log(colorArray[i / 9, i % 9]);
             }
             _cube.SetFaceColors(colorArray);
             Debug.Log(_solve.MakeSolution(_cube));
+
+            StaticCubeInfo.c = _cube;
+            StaticCubeInfo.s = _solve;
+
+            
+            if (_solve.MakeSolution(_cube) == true || _solve.MakeSolution(_cube) == false)
+            {
+                SceneManager.LoadScene("SolutionScene");
+            }
         }
     }
 }

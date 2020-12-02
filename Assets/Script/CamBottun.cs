@@ -48,6 +48,12 @@
         //new
         [SerializeField]
         private GameObject _pin = null;
+
+        [SerializeField]
+        private ChangeColor cc = null;
+        [SerializeField]
+        private CanvasManager cm = null;
+
         public void CamClick()
         {
             string image = "Assets/ScreenShot/" + trials.ToString() + "_" + Surface.ToString() + ".png";
@@ -55,6 +61,12 @@
             //ScreenCapture.CaptureScreenshot(image);
 
             StartCoroutine(Capture(image));
+
+            if(Surface==1) _cube.transform.eulerAngles = new Vector3(0, 90, 180);
+            if(Surface==2) _cube.transform.eulerAngles = new Vector3(0, 180, 180);
+            if(Surface==3) _cube.transform.eulerAngles = new Vector3(0, 270, 180);
+            if(Surface==4) _cube.transform.eulerAngles = new Vector3(0, 270, 270);
+            if(Surface==5) _cube.transform.eulerAngles = new Vector3(0, 270, 90);
 
 
         }
@@ -79,7 +91,7 @@
                 Rect _rect = new Rect((int)x, (int)y, (int)size.x, (int)size.y);
                 if (i % 3 == 0)
                 {
-                    x = pinPos.x;
+                    x = pinPos.x+220;
                 }
                 else if (i % 3 == 1)
                 {
@@ -87,7 +99,7 @@
                 }
                 else if (i % 3 == 2)
                 {
-                    x = pinPos.x+220;
+                    x = pinPos.x;
                 }
 
                 if (i / 3 == 2)
@@ -118,7 +130,14 @@
                 pasting(Surface, i, pngdata);
             }
 
+            
+            cc.Surface_num = Surface;
+            cm.menusurface = Surface;
+
+
             Surface++;
+       
+      
 
             if (Surface >= 6)
             {
@@ -154,7 +173,7 @@
                 }
             }*/
 
-            _cube.transform.eulerAngles = new Vector3(-10, 25, 173);
+            _cube.transform.eulerAngles = new Vector3(0, 270, 90);
         }
 
         public void OnImage()
@@ -176,9 +195,49 @@
                 }
             }
 
-            _cube.transform.eulerAngles = new Vector3(-10, 25, 173);
+            _cube.transform.eulerAngles = new Vector3(0, 0, 180);
 
             Surface = 0;
+        }
+
+        public void ChangeColor(int i, int j,color col)
+        {
+
+            _sur[i * 9 + j].colorPanel((int)col);
+
+        }
+
+        public void Retake()
+        {
+            if (Surface > 0)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    _sur[(Surface - 1) * 9 + j].resetSurfaces();
+                }
+                Surface--;
+            }
+
+            if (Surface == 0) _cube.transform.eulerAngles = new Vector3(0, 0, 180);
+            if (Surface == 1) _cube.transform.eulerAngles = new Vector3(0, 90, 180);
+            if (Surface == 2) _cube.transform.eulerAngles = new Vector3(0, 180, 180);
+            if (Surface == 3) _cube.transform.eulerAngles = new Vector3(0, 270, 180);
+            if (Surface == 4) _cube.transform.eulerAngles = new Vector3(0, 270, 270);
+            if (Surface == 5)
+            {
+                _screen.enabled = true;
+                _camImage.enabled = true;
+                _camButton.enabled = true;
+                _cameraframe.enabled = true;
+                _cubemodel.transform.localPosition = new Vector3(-200, -450, 0);
+                _yes.enabled = false;
+                _yestext.enabled = false;
+                _no.enabled = false;
+                _notext.enabled = false;
+                _cube.transform.eulerAngles = new Vector3(0, 270, 90);
+            }
+                
+
         }
     }
 }

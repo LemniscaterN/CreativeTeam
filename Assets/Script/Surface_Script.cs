@@ -22,14 +22,10 @@
 
         private int thisColor = 0;
 
-        void Start()
-        {
-
-        }
-
         // Update is called once per frame
         void Update()
         {
+            thisColor = (int)CubeInspection.colorArray[Surface_num, panel_num];
             if (done == false)
             {
                 color = new Color32(255, 0, 0, 255);
@@ -112,7 +108,7 @@
         public void colorPanel(int colorNum)
         {
             thisColor = colorNum;
-            
+            CubeInspection.colorArray[Surface_num, panel_num] = (color)colorNum;
         }
     }
 }

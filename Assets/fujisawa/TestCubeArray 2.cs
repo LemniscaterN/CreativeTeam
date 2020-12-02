@@ -177,4 +177,42 @@ public class TestCubeArray
         };
         return cubes;
     }
+
+
+    //SOveバグケース
+    public color[,] getB1()
+    {
+        color[,] colors = getCompColors();
+        colors[0, 1] = color.red;
+        colors[1, 1] = color.green;
+        colors[2, 1] = color.white;
+        colors[3, 1] = color.white;
+        colors[4, 3] = color.orange;
+        colors[4, 7] = color.blue;
+        return colors;
+    }
+
+    public color[,] getB2()
+    {
+        color[,] colors = getCompColors();
+        colors[0, 0] = color.yellow;
+        colors[0, 7] = color.blue;
+
+        colors[1, 0] = color.white;
+        colors[1, 8] = color.white;
+
+        colors[2, 1] = color.orange;
+        colors[2, 6] = color.red;
+
+        colors[3, 1] = color.green;
+        colors[3, 2] = color.red;
+
+        colors[4, 2] = color.orange;
+        colors[4, 7] = color.yellow;
+        colors[4, 8] = color.blue;
+
+        colors[5, 5] = color.white;
+        colors[5, 6] = color.green;
+        return colors;
+    }
 }

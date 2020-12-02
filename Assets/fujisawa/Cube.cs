@@ -30,12 +30,9 @@ public class Cube : MonoBehaviour, ICube
     private color[,] faceColors = new color[6, 9];
     private int[,] faceIds = new int[6, 9];
 
-
-    private CubeDefinitoin cd;
-
-    void Awake()
+    void Start()
     {
-        cd = GetComponent<CubeDefinitoin>();
+        Debug.Log("Cube Start!");
     }
 
     //同一キューブの存在確認
@@ -300,13 +297,13 @@ public class Cube : MonoBehaviour, ICube
         int CUBE_INCLUDES_PIXELCOUNT;
         if (isEdge)
         {
-            cubeIds = cd.GetEdgePairIds();
+            cubeIds = StaticCubeInfo.cd.GetEdgePairIds();
             CUBE_COUNT = 12;
             CUBE_INCLUDES_PIXELCOUNT = 2;
         }
         else
         {
-            cubeIds = cd.GetCornerTrioIds();
+            cubeIds = StaticCubeInfo.cd.GetCornerTrioIds();
             CUBE_COUNT = 8;
             CUBE_INCLUDES_PIXELCOUNT = 3;
         }

@@ -22,18 +22,18 @@ public class Solve : MonoBehaviour
 {
     private List<int> edgeSolution = new List<int>();
     private List<int> cornerSolution = new List<int>();
+    
 
-    private CubeDefinitoin cd = null;
-
-    void Awake()
+    void　Start()
     {
-        cd = gameObject.GetComponent<CubeDefinitoin>();
+        //Debug.Log("Test CubeArray start!!");
         //TestCubeArray tca = new TestCubeArray();
-        //Debug.Log("Awake!!");
-        //Cube cb = new Cube();
-        //cb.SetFaceIds(tca.getShColors7());
+        //Cube cb = GetComponent<Cube>();
+
+        //cb.SetFaceColors(tca.getShColors1());
         //cb.ShowCube();
         //MakeSolution(cb);
+        //StaticCubeInfo.s = this;
     }
 
     public List<int> GetEdgeSolution()
@@ -69,11 +69,11 @@ public class Solve : MonoBehaviour
         Debug.Log("解法表示:");
         foreach (var id in edgeSolution)
         {
-            Debug.Log($"Edge id:{id} 平仮名:{cd.GetPixelNameFromId(id)}");
+            Debug.Log($"Edge id:{id} 平仮名:{StaticCubeInfo.cd.GetPixelNameFromId(id)}");
         }
         foreach (var id in cornerSolution)
         {
-            Debug.Log($"Corn id:{id} 平仮名:{cd.GetPixelNameFromId(id)}");
+            Debug.Log($"Corn id:{id} 平仮名:{StaticCubeInfo.cd.GetPixelNameFromId(id)}");
         }
 
         return true;
@@ -82,8 +82,8 @@ public class Solve : MonoBehaviour
     //エッジキューブとコーナーキューブに番号を振る
     private int GetCubeIdFromPixelId(int pixelId)
     {
-        int[][] edgeInclude = cd.GetEdgePairIds();
-        int[][] cornerInclude = cd.GetCornerTrioIds(); ;
+        int[][] edgeInclude = StaticCubeInfo.cd.GetEdgePairIds();
+        int[][] cornerInclude = StaticCubeInfo.cd.GetCornerTrioIds(); ;
         for (int i = 0; i < 12; i++)
         {
             int index = Array.IndexOf(edgeInclude[i], pixelId);
@@ -101,7 +101,7 @@ public class Solve : MonoBehaviour
     private bool IsEdge(int pixelId)
     {
         int[][] edgeInclude = new int[12][];
-        edgeInclude = cd.GetEdgePairIds();
+        edgeInclude = StaticCubeInfo.cd.GetEdgePairIds();
         int Id = -1;
         for (int i = 0; i < edgeInclude.Length; i++)
         {
@@ -114,7 +114,7 @@ public class Solve : MonoBehaviour
     private bool IsCorner(int pixelId)
     {
         int[][] cornerInclude = new int[8][];
-        cornerInclude = cd.GetCornerTrioIds();
+        cornerInclude = StaticCubeInfo.cd.GetCornerTrioIds();
         int Id = -1;
         for (int i = 0; i < cornerInclude.Length; i++)
         {
@@ -126,7 +126,7 @@ public class Solve : MonoBehaviour
 
     private bool IsEdgeBufferCubeId(int id, bool truely = false)
     {
-        int[] ids = cd.GetEdgeBufferPixelIds();
+        int[] ids = StaticCubeInfo.cd.GetEdgeBufferPixelIds();
         if (truely && id == ids[0]) return true;
         if (!truely && (id == ids[0] || id == ids[1])) return true;
         return false;
@@ -134,7 +134,7 @@ public class Solve : MonoBehaviour
 
     private bool IsCornerBufferCubeId(int id, bool truely = false)
     {
-        int[] ids = cd.GetCornerBufferPixelIds();
+        int[] ids = StaticCubeInfo.cd.GetCornerBufferPixelIds();
         if (truely && id == ids[0]) return true;
         if (!truely && (id == ids[0] || id == ids[1] || id == ids[2])) return true;
         return false;
@@ -174,7 +174,7 @@ public class Solve : MonoBehaviour
     private bool IsSameCornerCube(int a, int b)
     {
         int[][] cornerInclude = new int[8][];
-        cornerInclude = cd.GetCornerTrioIds();
+        cornerInclude = StaticCubeInfo.cd.GetCornerTrioIds();
         for (int i = 0; i < cornerInclude.Length; i++)
         {
             int Id1 = Array.IndexOf(cornerInclude[i], a);
@@ -187,11 +187,11 @@ public class Solve : MonoBehaviour
     private bool MakeEdgeSolutino(int[,] faceIds)
     {
 
-        int bufferPixelId = cd.GetEdgeBufferPixelIds(true)[0];
+        int bufferPixelId = StaticCubeInfo.cd.GetEdgeBufferPixelIds(true)[0];
         int bufferFace = bufferPixelId / 10;
         int bufferPixel = bufferPixelId % 10;
 
-        Cube solver = new Cube();
+        Cube solver = StaticCubeInfo.c;
         solver.SetFaceIds(faceIds);
 
         int[,] solverFaceIds = solver.GetFaceIds();
@@ -306,11 +306,11 @@ public class Solve : MonoBehaviour
     private bool MakeCornerSolution(int[,] faceIds)
     {
 
-        Cube solver = new Cube();
+        Cube solver = StaticCubeInfo.c;
         solver.SetFaceIds(faceIds);
 
         int[,] solverFaceIds = solver.GetFaceIds();
-        int bufferPixelId = cd.GetCornerBufferPixelIds(true)[0];
+        int bufferPixelId = StaticCubeInfo.cd.GetCornerBufferPixelIds(true)[0];
         int bufferFace = bufferPixelId / 10;
         int bufferPixel = bufferPixelId % 10;
 

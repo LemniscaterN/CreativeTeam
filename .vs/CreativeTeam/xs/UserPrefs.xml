@@ -1,35 +1,18 @@
 ﻿<Properties StartupConfiguration="{F4DC7CBA-EEA7-6A79-9B0B-4AF65986F822}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/fujisawa/TestCubeArray 2.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/CubeInspection.cs">
     <Files>
-      <File FileName="Assets/Script/CubeInspection.cs" Line="24" Column="1" />
-      <File FileName="Assets/Script/CamBottun.cs" Line="89" Column="18" />
-      <File FileName="Assets/fujisawa/CubeDefinitoin.cs" Line="83" Column="1" />
-      <File FileName="Assets/fujisawa/Solve.cs" Line="388" Column="1" />
-      <File FileName="Assets/maru/ColorDiscrimination.cs" Line="19" Column="1" />
-      <File FileName="Assets/fujisawa/TestCubeArray 2.cs" Line="15" Column="9" />
+      <File FileName="Assets/fujisawa/StaticCubeInfo.cs" Line="12" Column="1" />
+      <File FileName="Assets/fujisawa/Solve.cs" Line="69" Column="1" />
+      <File FileName="Assets/fujisawa/TrigerManager3.cs" Line="60" Column="6" />
+      <File FileName="Assets/Script/ChangeColor.cs" Line="14" Column="9" />
+      <File FileName="Assets/Script/WebCamTest.cs" Line="17" Column="1" />
+      <File FileName="Assets/fujisawa/CubeSetups.cs" Line="22" Column="1" />
+      <File FileName="Assets/Script/CubeInspection.cs" Line="38" Column="51" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="CreativeTeam" expanded="True">
-            <Node name="Assets" expanded="True">
-              <Node name="fujisawa" expanded="True">
-                <Node name="TestCubeArray 2.cs" selected="True" />
-              </Node>
-              <Node name="maru" expanded="True" />
-              <Node name="Script" expanded="True" />
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="07943af2-2355-4fc9-8f7b-73210950a94f" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="752e753a-7697-40ef-8f60-5906c732f468" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

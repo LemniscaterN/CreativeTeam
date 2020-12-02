@@ -23,11 +23,12 @@ public class CubeDefinitoin : MonoBehaviour
 
     void Awake()
     {
+        Debug.Log("CubeDef　Awake");
         //ここでテキストから呼び出し予定
     }
 
     //マスの名前 ひらがながデフォ
-    private string[,] PixelName = new string[6, 9] {
+    public static string[,] PixelName = new string[6, 9] {
             {"け","て","せ","け","　C　","せ","く","つ","す"},
             {"れ","ら","ら","れ","　C　","り","る","る","り"},
             {"さ","た","か","し","　C　","き","し","ち","き"},

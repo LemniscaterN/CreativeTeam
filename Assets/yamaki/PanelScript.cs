@@ -19,17 +19,6 @@ public class PanelScript : MonoBehaviour
     /*[SerializeField]
     private Material gray = null;*/
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void changecolor(color cal)
     {
