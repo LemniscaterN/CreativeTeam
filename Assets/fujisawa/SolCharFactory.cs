@@ -16,6 +16,13 @@ public class SolCharFactory : MonoBehaviour
     private Color normal = Color.black;
     private Color highlight = Color.red;
 
+    private aiueo aiu;
+
+    public void Start()
+    {
+        aiu = GameObject.Find("GojuonVoice").GetComponent<aiueo>();
+    }
+
     public void CreateSolutionText()
     {
         if (edgeTexts.Count != 0 || cornerTexts.Count != 0) return;
@@ -25,18 +32,22 @@ public class SolCharFactory : MonoBehaviour
 
     }
 
-    public void ChangeSolCharColor(int index,bool IsEdge) {
+    public void ChangeSolCharColor(int index,bool IsEdge,bool soundOn=true) {
         Debug.Log("colorChanege"+index);
         if (IsEdge == true)
         {
             if (edgeTexts[index].color == normal) edgeTexts[index].color = highlight;
             else edgeTexts[index].color = normal;
+            if(soundOn)aiu.aiuevoice(edgeTexts[index].text);
         }
         else {
             index -= edgeTexts.Count;
             if (cornerTexts[index].color == normal) cornerTexts[index].color = highlight;
             else cornerTexts[index].color = normal;
+            if (soundOn) aiu.aiuevoice(cornerTexts[index].text);
         }
+        
+        
     }
 
     private void SolDisp(bool IsEdge) {

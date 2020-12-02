@@ -51,6 +51,9 @@ public class TrigerManager3 : MonoBehaviour
     //各ひらがなのコンテナ
     private List<AContainer> SolList = new List<AContainer>();
 
+    private aiueo aiu;
+    
+
     void Start()
     {
         Initialization();
@@ -221,7 +224,7 @@ public class TrigerManager3 : MonoBehaviour
                     //dispが戻せる
                     prebFlg = true;
                     //Debug.Log("Preb 2");
-                    if (indexDisp-1==0)sc.ChangeSolCharColor(indexSolList,SolList[indexSolList].IsEdge);
+                    if (indexDisp-1==0)sc.ChangeSolCharColor(indexSolList,SolList[indexSolList].IsEdge,false);
                     indexDisp--;
                     changeDispListColor(indexDisp);
                     indexExcute = SolList[indexSolList].Excute[indexDisp].Count - 1;
@@ -232,7 +235,6 @@ public class TrigerManager3 : MonoBehaviour
                     //indexSollistが戻せる
                     prebFlg = true;
                     //Debug.Log("Preb 3　上の色戻す");
-                    //sc.ChangeSolCharColor(indexSolList,SolList[indexSolList].IsEdge);
                     SetDispList(SolList[indexSolList].Disp, true);
                     indexSolList--;
                     indexDisp = SolList[indexSolList].Disp.Count-1;
@@ -252,9 +254,8 @@ public class TrigerManager3 : MonoBehaviour
                 indexExcute--;
                 prebFlg = true;
                 isComp = false;
-                if(indexDisp==0)sc.ChangeSolCharColor(indexSolList, SolList[indexSolList].IsEdge);
+                if(indexDisp==0)sc.ChangeSolCharColor(indexSolList, SolList[indexSolList].IsEdge,false);
 
-                //sc.ChangeSolCharColor(indexSolList, SolList[indexSolList].IsEdge);
             }
             
             
