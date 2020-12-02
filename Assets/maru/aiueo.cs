@@ -43,8 +43,8 @@ public class aiueo : MonoBehaviour
     {
         Gojuon[i].Play();
         yield return new WaitForSeconds(j);
-        Gojuon[i].Stop();
-        yield break;
+        //Gojuon[i].Stop();
+        //yield break;
     }
     
     /*テスト用
