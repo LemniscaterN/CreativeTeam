@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Title/title.unity
+    guid: 3be96e8618cd9472083136abac8c2ece
+  - enabled: 1
+    path: Assets/Scenes/CameraScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/ConfigScene/ConfigScene.unity
+    guid: 0d4c15a9949a24655a98d2dbbe260f90
+  - enabled: 1
+    path: Assets/CameraTutorial/Cameratutorial.unity
+    guid: 2a7a2713251f346e188e9002fff14f29
+  - enabled: 1
+    path: Assets/maru/newmaru/selectmenu.unity
+    guid: ed1e4ada8bddc475ba953c69c42317af
+  - enabled: 1
+    path: Assets/maru/newmaru/training.unity
+    guid: d1f2729baa3274acfa00d30018f33001
+  - enabled: 1
+    path: Assets/Script/SolutionScript/SolutionScene.unity
+    guid: 5a95c9110f53942d4be097f4059181e9
+  - enabled: 1
+    path: Assets/fujisawa/tutorial/solutionTutorial.unity
+    guid: ebf960a0b57294c15a67de99ed0ce86d
+  m_configObjects: {}

@@ -1,0 +1,147 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:3:1-26:12
+INJECTED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:3:1-26:12
+INJECTED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:3:1-26:12
+INJECTED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:3:1-26:12
+INJECTED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:3:1-26:12
+INJECTED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:3:1-26:12
+INJECTED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:3:1-26:12
+	package
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:3:70-98
+		INJECTED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml
+		INJECTED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:3:1-26:12
+		INJECTED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml
+	xmlns:tools
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:3:99-145
+	android:versionCode
+		INJECTED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:3:1-26:12
+		INJECTED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:3:11-69
+application
+ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:4:3-16:17
+activity#com.unity3d.player.UnityPlayerActivity
+ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:5:5-11:16
+	android:maxAspectRatio
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:5:186-214
+	android:screenOrientation
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:5:111-153
+	android:launchMode
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:5:154-185
+	android:hardwareAccelerated
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:5:397-432
+	android:configChanges
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:5:215-396
+	android:theme
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:5:69-110
+	android:name
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:5:15-68
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:6:7-9:23
+action#android.intent.action.MAIN
+ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:7:9-61
+	android:name
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:7:17-58
+category#android.intent.category.LAUNCHER
+ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:8:9-69
+	android:name
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:8:19-66
+meta-data#unityplayer.UnityActivity
+ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:10:7-82
+	android:value
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:10:59-79
+	android:name
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:10:18-58
+meta-data#unity.splash-mode
+ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:12:5-69
+	android:value
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:12:49-66
+	android:name
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:12:16-48
+meta-data#unity.splash-enable
+ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:13:5-74
+	android:value
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:13:51-71
+	android:name
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:13:16-50
+meta-data#android.max_aspect
+ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:14:5-72
+	android:value
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:14:50-69
+	android:name
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:14:16-49
+meta-data#unity.build-id
+ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:15:5-101
+	android:value
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:15:46-98
+	android:name
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:15:16-45
+uses-feature#0x00030000
+ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:17:3-52
+	android:glEsVersion
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:17:17-49
+uses-feature#android.hardware.vulkan.version
+ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:18:3-91
+	android:required
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:18:64-88
+	android:name
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:18:17-63
+uses-permission#android.permission.CAMERA
+ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:19:3-63
+	android:name
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:19:20-60
+uses-feature#android.hardware.camera
+ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:20:3-83
+	android:required
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:20:56-80
+	android:name
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:20:17-55
+uses-feature#android.hardware.camera.autofocus
+ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:21:3-93
+	android:required
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:21:66-90
+	android:name
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:21:17-65
+uses-feature#android.hardware.camera.front
+ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:22:3-89
+	android:required
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:22:62-86
+	android:name
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:22:17-61
+uses-feature#android.hardware.touchscreen
+ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:23:3-88
+	android:required
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:23:61-85
+	android:name
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:23:17-60
+uses-feature#android.hardware.touchscreen.multitouch
+ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:24:3-99
+	android:required
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:24:72-96
+	android:name
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:24:17-71
+uses-feature#android.hardware.touchscreen.multitouch.distinct
+ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:25:3-108
+	android:required
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:25:81-105
+	android:name
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml:25:17-80
+uses-sdk
+INJECTED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml
+INJECTED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml
+INJECTED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml
+INJECTED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml
+		INJECTED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml
+		ADDED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml
+		INJECTED from /Users/fujisawa/CreativeTeam2/Temp/gradleOut/unityLibrary/src/main/AndroidManifest.xml
